@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Product from "../components/Product";
-import User from "../components/User";
-import Login from "../components/Login";
+import Product from "../views/Product";
+import User from "../views/User";
 import App from "../App";
 
 Vue.use(Router)
@@ -16,6 +15,11 @@ export default new Router({
 
     },*/
     {
+      path:'/index',
+      name:'index',
+      component:()=>import('../views/index')  //按需加载
+    },
+    {
       path:'/product',
       name:'product',
       component:Product
@@ -28,7 +32,7 @@ export default new Router({
     {
       path:'/login',
       name:'login',
-      component:Login
+      component:()=>import('../views/Login')
     }
   ]
 })

@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
     <router-link to="login">Login</router-link>
     <router-link to="user">User</router-link>
     <router-link to="product">Product</router-link>
