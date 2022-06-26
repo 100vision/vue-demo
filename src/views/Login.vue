@@ -5,7 +5,7 @@
     <el-form  :rules="rules"  :model="loginForm" ref="loginForm" class="loginContainer" >
       <h3 class="loginCaption">用户登录</h3>
       <el-form-item prop="username">
-        <el-input type="text"  autocomplete="off" v-model="loginForm.userName" placeholder="请输入用户名"></el-input>
+        <el-input type="text"  autocomplete="off" v-model="loginForm.username" placeholder="请输入用户名"></el-input>
       </el-form-item>
       <el-form-item  prop="password">
         <el-input type="password"  autocomplete="off" v-model="loginForm.password" placeholder="请输入密码"></el-input>
@@ -41,15 +41,12 @@
             //表单输入校验
             rules:{
               userName:[{required:true,message:"请输入用户名",trigger:'blur' }],
-              password:[{required:true,message:"请输入密码",trigger:'blur' }],
-              captcha:[{required:true,message:"请输入验证码",trigger:'blur' }]
-
-            }
-
+              password:[{required:true,message:"请输入密码",trigger:'blur' }]
 
 
           }
-        },
+        }
+      },
       methods:{
           login() {
             //验证验证码是否正确
@@ -60,7 +57,7 @@
             //业务成功后，后端把token写入到response的header["token"]
             // 业务失败的返回格式：{"respStatus":1,"respMessage":"操作失败","payload":"密码不正确!","success":false}
             //
-            instance.post("/user/login",this.loginForm)
+            instance.post("/login",this.loginForm)
               .then(resp => {
                 if(resp.data.success === true)
                 {

@@ -5,9 +5,9 @@ import {Message} from "element-ui";
 
 //创建一个axios对象实例，并定义所有api地址的起始Url前缀，例如api服务器主机名等
 const instance = axios.create({
-  baseURL:"http://localhost:8092/",
+  baseURL:"http://localhost:8091/",
   timeout:5000,
-  withCredentials:false
+  withCredentials: false
 });
 
 //axios请求拦截器，例如：所有请求带上token(登录成功后的token）
