@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <router-link to="login">Login</router-link>
+<!--    <router-link to="login">Login</router-link>
     <router-link to="user">User</router-link>
-    <router-link to="product">Product</router-link>
+    <router-link to="product">Product</router-link>-->
     <router-view/>
   </div>
 </template>

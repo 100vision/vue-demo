@@ -10,18 +10,26 @@ const instance = axios.create({
   withCredentials: false
 });
 
+
 //axios请求拦截器，例如：所有请求带上token(登录成功后的token）
 instance.interceptors.request.use(config=>{
   console.log("request intercepted");
+  config.headers['authorization'] = localStorage.getItem("token");
 
   return config;
 });
 
 //axios响应拦截器，例如：前端统一处理响应异常
 instance.interceptors.response.use(response=>{
+
   //业务逻辑错误的拦截
-  if(response.data.success === false) {
-       Message.error(response.data.payload);
+  if(!response.data.success) {
+    //后端定义的返回业务错误代码4003，token过期或是没有携带token
+    if(response.data.respStatus == 4003) {Message.error("您尚未登录!");}
+    else{
+      Message.error(response.data.payload);
+    };
+
        return ;
   }
   return response;
@@ -31,6 +39,7 @@ instance.interceptors.response.use(response=>{
     if(err.response.status == 500 || err.response.status == 504) {
       Message.error("服务器网络或内部异常");
     }
+
   }
 );
 

@@ -28,8 +28,9 @@
 <script>
 
   import axios from 'axios';
+  import instance from "../utils/request";
     export default {
-        name: "Product",
+        name: "products",
         data(){
           return{
             title:'产品列表',
@@ -42,8 +43,9 @@
         methods:{
 
           getAll() {
-            axios.get("http://localhost:8080/v2/product/listall")
-              .then(resp =>this.products=resp.data.payload)
+            instance.get("/api/product/listall")
+              .then(
+                resp =>this.products=resp.data.payload)
               .catch(err=>console.log(err));
           }
 

@@ -61,8 +61,9 @@
               .then(resp => {
                 if(resp.data.success === true)
                 {
-                  //成功登录后，拿到后端response的token并写入浏览器的lcoal storage.
-                  //localStorage.setItem("token",resp.headers["Token"]);
+                  //成功登录后，拿到后端response的token并写入浏览器的local storage.
+                  localStorage.setItem("token",resp.headers["authorization"]);
+                  console.log(resp.headers);
 
                   //切换路由到主页
                   this.$router.push({name:'index'});
