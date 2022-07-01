@@ -7,16 +7,18 @@ const path = require('path')
 module.exports = {
   dev: {
 
-    // Paths
+    //Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
+      //配置跨域
+        '/api':{
+                  //实际api服务器url
+                  target:'http://localhost:8080',
+                  changeOrigin:true,
 
+          }
 
-        '/':{
-        target:'http://localhost:8080',
-        changeOrigin:true        
-        }
 
     },
 
@@ -28,7 +30,7 @@ module.exports = {
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
 
-    //配置跨域
+
 
 
 

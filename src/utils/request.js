@@ -3,11 +3,11 @@ import {Message} from "element-ui";
 
 
 
-//创建一个axios对象实例，并定义所有api地址的起始Url前缀，例如api服务器主机名等
+//创建一个全局axios对象实例，并定义所有api地址的起始Url前缀，例如api服务器主机名等
 const instance = axios.create({
-  baseURL:"http://localhost:8091/",
+  baseURL:"http://localhost:8080/",
   timeout:5000,
-  withCredentials: false
+  withCredentials: true
 });
 
 
@@ -36,9 +36,11 @@ instance.interceptors.response.use(response=>{
 
   },error => {
     //api接口异常的拦截
-    if(err.response.status == 500 || err.response.status == 504) {
+    if(err.response.status == 500 || err.response.status == 504 || err.response.status == 404) {
       Message.error("服务器网络或内部异常");
     }
+
+
 
   }
 );

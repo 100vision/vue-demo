@@ -6,7 +6,7 @@
           <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
             <el-menu router>
               <!-- 从路由中遍历一级菜单项 --->
-              <el-submenu index="1" v-for="(item,index) in this.$router.options.routes" :key="index" v-if="!item.hidden">
+              <el-submenu index="1" v-for="(item,index) in routes" :key="index" v-if="!item.hidden">
                 <template slot="title"><i class="el-icon-location"></i>
                   <span>{{item.name}}</span>
                 </template>
@@ -44,10 +44,14 @@ export default {
   methods:{
 
   },
+  computed:{
+    routes(){
+      return this.$store.state.routes;
 
-  created() {
-
+    }
   }
+
+
 }
 </script>
 

@@ -10,7 +10,7 @@
       <el-form-item  prop="password">
         <el-input type="password"  autocomplete="off" v-model="loginForm.password" placeholder="请输入密码"></el-input>
       </el-form-item>
-      <el-form-item prop="checkCaptchaInput" >
+      <el-form-item prop="captcha" >
         <el-input type="text"  autocomplete="off" v-model="loginForm.captcha" placeholder="请输入验证码" style="width: 200px;margin-right:250px"></el-input>
         <img :src="captchaUrl" @click="getCaptcha" >
       </el-form-item>
@@ -21,13 +21,12 @@
     </el-form>
 
 
-
   </div>
 
 </template>
 
 <script>
-    import instance from "../utils/request";
+    //import instance from "../utils/request";
 
     export default {
         name: "Login",
@@ -35,14 +34,14 @@
           return{
             title:'用户登录',
             loginForm:{},
-            captchaUrl:'/captcha?time='+ new Date(),
+            captchaUrl:'http://localhost:8080/captcha?time='+ new Date(),
             rememberMe:false,
 
             //表单输入校验
             rules:{
               userName:[{required:true,message:"请输入用户名",trigger:'blur' }],
-              password:[{required:true,message:"请输入密码",trigger:'blur' }]
-
+              password:[{required:true,message:"请输入密码",trigger:'blur' }],
+              captcha:[{required:true,message:"请输入验证码",trigger:'blur' }],
 
           }
         }
@@ -57,9 +56,9 @@
             //业务成功后，后端把token写入到response的header["token"]
             // 业务失败的返回格式：{"respStatus":1,"respMessage":"操作失败","payload":"密码不正确!","success":false}
             //
-            instance.post("/login",this.loginForm)
+            this.$instance.post("/login",this.loginForm)
               .then(resp => {
-                if(resp.data.success === true)
+                if(resp.data.success)
                 {
                   //成功登录后，拿到后端response的token并写入浏览器的local storage.
                   localStorage.setItem("token",resp.headers["authorization"]);
@@ -67,15 +66,12 @@
 
                   //切换路由到主页
                   this.$router.push({name:'index'});
-                }else{
-                  alert(resp.data.payload);
                 }
-              }).catch(err=>alert("服务器异常"));
-
+            }).catch(err => console.log(err));
           },
           getCaptcha() {
 
-                    this.captchaUrl = '/captcha?time='+ new Date()
+                    this.captchaUrl = 'http://localhost:8080/captcha?time='+ new Date()
           }
       },
 
