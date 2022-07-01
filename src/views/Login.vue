@@ -28,6 +28,8 @@
 <script>
     //import instance from "../utils/request";
 
+    import axios from "axios";
+
     export default {
         name: "Login",
       data() {
@@ -65,7 +67,7 @@
                   console.log(resp.headers);
 
                   //切换路由到主页
-                  this.$router.push({name:'index'});
+                  this.$router.push({name:'home',params:{username:this.loginForm.username}});
                 }
             }).catch(err => console.log(err));
           },
