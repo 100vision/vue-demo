@@ -20,8 +20,8 @@ module.exports = {
           },
       '/':{
         //实际api服务器url
-        target:'http://localhost:8080',
-        changeOrigin:true
+                  target:'http://localhost:8080',
+                  changeOrigin:true
 
       }
 
