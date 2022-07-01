@@ -13,7 +13,7 @@ module.exports = {
     proxyTable: {
       //配置跨域
         '/api':{
-                  //实际api服务器url
+                  //后端实际api服务器url
                   target:'http://localhost:8080',
                   changeOrigin:true
 
