@@ -18,7 +18,7 @@ module.exports = {
                   changeOrigin:true
 
           },
-      '/login':{
+      '/':{
         //实际api服务器url
         target:'http://localhost:8080',
         changeOrigin:true

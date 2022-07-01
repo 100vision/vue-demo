@@ -36,7 +36,7 @@
           return{
             title:'用户登录',
             loginForm:{},
-            captchaUrl:'http://localhost:8080/captcha?time='+ new Date(),
+            captchaUrl:'/captcha?time='+ new Date(),
             rememberMe:false,
 
             //表单输入校验
@@ -67,13 +67,13 @@
                   console.log(resp.headers);
 
                   //切换路由到主页
-                  this.$router.push({name:'home',params:{username:this.loginForm.username}});
+                  this.$router.replace({name:'home'});
                 }
             }).catch(err => console.log(err));
           },
           getCaptcha() {
 
-                    this.captchaUrl = 'http://localhost:8080/captcha?time='+ new Date()
+                    this.captchaUrl = '/captcha?time='+ new Date()
           }
       },
 

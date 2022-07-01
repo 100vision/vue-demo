@@ -11,8 +11,8 @@ export const getMenuRoutes = (router,store) => {
   }
 
 
-  //1.获取后端接口数据库的原始路由数据
-  instance.get('/api/menu/?username=kris').then(resp =>{
+  //1.获取后端接口数据库的原始路由数据。不需要传入任何参数，例如用户名。但前提是后端Spring Security项目的接口实现了从SecurityContext获取用户名。
+  instance.get('/api/menu/').then(resp =>{
     if(resp){
 
       //调用自定义方法parseRoutes得到格式化好的路由。因api接口获取到路由数据中component是一个字符串，不能直接做路由使用，需要在写一个方法转换成vue组件对象
