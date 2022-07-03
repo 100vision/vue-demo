@@ -30,7 +30,7 @@
   import axios from 'axios';
   import instance from "../utils/request";
     export default {
-        name: "products",
+        name: 'product',
         data(){
           return{
             title:'产品列表',

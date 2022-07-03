@@ -1,12 +1,15 @@
 <template>
   <div>
     <el-container>
-      <el-header>Header</el-header>
+      <el-header class="home-header">
+        <div >
+          PowerOffice
+        </div></el-header>
       <el-container>
           <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-            <el-menu router>
+            <el-menu router unique-opened>
               <!-- 从路由中遍历一级菜单项 --->
-              <el-submenu index="1" v-for="(item,index) in routes" :key="index" v-if="!item.hidden">
+              <el-submenu index=":index+''" v-for="(item,index) in routes" :key="index" v-if="!item.hidden">
                 <template slot="title"><i class="el-icon-location"></i>
                   <span>{{item.name}}</span>
                 </template>
@@ -32,7 +35,7 @@
 <script>
 export default {
 
-  name: "home",
+  name: 'home',
 
   data() {
     return{
@@ -46,6 +49,7 @@ export default {
   },
   computed:{
     routes(){
+      console.log(this.$store.state.routes);
       return this.$store.state.routes;
 
     }
@@ -88,5 +92,14 @@ body > .el-container {
 
 .el-container:nth-child(7) .el-aside {
   line-height: 320px;
+}
+
+.home-header {
+  background: cornsilk;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  box-sizing: border-box;
+  justify-content: space-between;
 }
 </style>

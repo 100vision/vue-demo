@@ -19,9 +19,10 @@ Vue.prototype.$instance = instance;
 router.beforeEach((to,from,next) => {
   //根据token判断当前浏览器是否已经登录，如果没有登录不加载路由菜单。
   if(window.localStorage.getItem("token")) {
-    console.log("landing page")
-    getMenuRoutes(router,store);
-    next();
+      console.log("landing page")
+      getMenuRoutes(router,store);
+      console.log(store.state.routes);
+      next();
   }else{
       next();
   }

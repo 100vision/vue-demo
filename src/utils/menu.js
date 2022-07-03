@@ -18,6 +18,7 @@ export const getMenuRoutes = (router,store) => {
       //调用自定义方法parseRoutes得到格式化好的路由。因api接口获取到路由数据中component是一个字符串，不能直接做路由使用，需要在写一个方法转换成vue组件对象
       let routesParsed = parseRoutes(resp.data.payload);
 
+
       //格式化后添加到Vue router
       router.addRoutes(routesParsed);
 
@@ -51,14 +52,14 @@ export const parseRoutes = (routes) =>{
       name:name,
       children:children,
       component(resolve){
-        require(['../views/'+ component +'.vue'],resolve);
+        require(['../views/'+ component + '.vue'],resolve);
       }
     }
 
     routesStaging.push(routeParsed);
 
 
-  })
+  });
 
   return routesStaging;
 }
