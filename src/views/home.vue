@@ -2,9 +2,11 @@
   <div>
     <el-container>
       <el-header class="home-header">
-        <div >
-          PowerOffice
-        </div></el-header>
+          <div class="home-title">
+            PowerOffice
+          </div>
+
+      </el-header>
       <el-container>
           <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
             <el-menu router unique-opened>
@@ -60,12 +62,7 @@ export default {
 </script>
 
 <style scoped>
-.el-header, .el-footer {
-  background-color: #B3C0D1;
-  color: #333;
-  text-align: center;
-  line-height: 60px;
-}
+
 
 .el-aside {
   background-color: #D3DCE6;
@@ -95,11 +92,18 @@ body > .el-container {
 }
 
 .home-header {
-  background: cornsilk;
+  background: #0410ee;
   display: flex;
   align-items: center;
-  padding: 0 15px;
   box-sizing: border-box;
   justify-content: space-between;
+
+}
+.home-title {
+  color: white;
+  padding: 2px;
+  font-family: "Microsoft YaHei";
+  font-size: large;
+
 }
 </style>
