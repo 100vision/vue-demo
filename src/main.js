@@ -18,10 +18,11 @@ Vue.prototype.$instance = instance;
 //路由守卫。切换路由时不销毁vue组件和路由
 router.beforeEach((to,from,next) => {
   //根据token判断当前浏览器是否已经登录，如果没有登录不加载路由菜单。
-  if(window.localStorage.getItem("token")) {
-      console.log("landing page")
+  if(window.sessionStorage.getItem("token")) {
       getMenuRoutes(router,store);
-      console.log(store.state.routes);
+      if(!window.sessionStorage.getItem("username")) {
+        instance.get("/api/user/info").then(resp=> window.sessionStorage.setItem("username",JSON.stringify(resp.data.payload)));
+      }
       next();
   }else{
       next();

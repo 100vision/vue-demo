@@ -41,7 +41,7 @@
 
             //表单输入校验
             rules:{
-              userName:[{required:true,message:"请输入用户名",trigger:'blur' }],
+              username:[{required:true,message:"请输入用户名",trigger:'blur' }],
               password:[{required:true,message:"请输入密码",trigger:'blur' }],
               captcha:[{required:true,message:"请输入验证码",trigger:'blur' }],
 
@@ -59,12 +59,11 @@
             // 业务失败的返回格式：{"respStatus":1,"respMessage":"操作失败","payload":"密码不正确!","success":false}
             //
             this.$instance.post("/login",this.loginForm)
-              .then(resp => {
-                if(resp.data.success)
+              .then(response => {
+                if(response.data.success)
                 {
                   //成功登录后，拿到后端response的token并写入浏览器的local storage.
-                  localStorage.setItem("token",resp.headers["authorization"]);
-                  console.log(resp.headers);
+                  window.sessionStorage.setItem("token",response.headers["authorization"]);
 
                   //切换路由到主页
                   this.$router.replace({name:'home'});

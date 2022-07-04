@@ -1,5 +1,5 @@
 import axios from "axios"; //引入axios
-import {Message} from "element-ui";
+import {Message, MessageBox} from "element-ui";
 
 
 
@@ -13,8 +13,8 @@ const instance = axios.create({
 
 //axios请求拦截器，例如：所有请求带上token(登录成功后的token）
 instance.interceptors.request.use(config=>{
-  console.log("request intercepted");
-  config.headers['authorization'] = localStorage.getItem("token");
+  //console.log("request intercepted");
+  config.headers['authorization'] = sessionStorage.getItem("token");
 
   return config;
 });
@@ -25,7 +25,9 @@ instance.interceptors.response.use(response=>{
   //业务逻辑错误的拦截
   if(!response.data.success) {
     //后端定义的返回业务错误代码4003，token过期或是没有携带token
-    if(response.data.respStatus == 4003) {Message.error("您尚未登录!");}
+    if(response.data.respStatus == 4003) {
+      Message.error("登录超时");
+    }
     else{
       Message.error(response.data.payload);
     };

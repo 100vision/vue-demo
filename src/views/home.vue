@@ -5,6 +5,18 @@
           <div class="home-title">
             PowerOffice
           </div>
+        <div>
+          <el-dropdown @command="commandHandler">
+  <span class="el-dropdown-link">
+    {{ username }}<i class="el-icon-arrow-down el-icon--right"></i>
+  </span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item command="details">个人中心</el-dropdown-item>
+              <el-dropdown-item command="preference">其他信息</el-dropdown-item>
+              <el-dropdown-item command="logout">退出系统</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </div>
 
       </el-header>
       <el-container>
@@ -41,21 +53,37 @@ export default {
 
   data() {
     return{
-      title:"我是主页",
-      user:{}
+        username:window.sessionStorage.getItem('username')
     }
   },
 
   methods:{
 
+    //退出系统
+    logout() {
+      window.sessionStorage.removeItem("token");
+      window.sessionStorage.removeItem("username");
+
+      //清空vuex里的菜单路由
+      //this.$store.commit('saveRoutes2Store',[]);
+      this.$store.commit('saveRoutes2Store',[]);
+      //跳转到登录页
+      this.$router.replace("/")
+    },
+    commandHandler(command) {
+      if(command == 'logout') {
+        this.logout();
+      }
+    }
+
   },
   computed:{
     routes(){
-      console.log(this.$store.state.routes);
       return this.$store.state.routes;
 
     }
-  }
+  },
+
 
 
 }
@@ -106,4 +134,13 @@ body > .el-container {
   font-size: large;
 
 }
+
+.el-dropdown-link {
+  cursor: pointer;
+  color: #409EFF;
+}
+.el-icon-arrow-down {
+  font-size: 12px;
+}
+
 </style>
