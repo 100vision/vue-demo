@@ -15,7 +15,7 @@ Vue.use(ElementUI);
 //全局使用axios 实例
 Vue.prototype.$instance = instance;
 
-//路由守卫。切换路由时不销毁vue组件和路由
+//路由导航守卫。全局控制切换路由时的判断逻辑不销毁vue组件和路由
 router.beforeEach((to,from,next) => {
   //根据token判断当前浏览器是否已经登录，如果没有登录不加载路由菜单。
   if(window.sessionStorage.getItem("token")) {
