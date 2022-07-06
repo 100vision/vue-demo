@@ -8,7 +8,7 @@
         <div>
           <el-dropdown @command="commandHandler">
   <span class="el-dropdown-link">
-    {{ username }}<i class="el-icon-arrow-down el-icon--right"></i>
+    {{ user.username }}<i class="el-icon-arrow-down el-icon--right"></i>
   </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item command="details">个人中心</el-dropdown-item>
@@ -52,23 +52,23 @@ export default {
   name: 'home',
 
   data() {
-    return{
-        username:window.sessionStorage.getItem('username')
-    }
-  },
+    return {
+        user: JSON.parse(window.sessionStorage.getItem("user"))
+      }
+    },
+
 
   methods:{
 
     //退出系统
     logout() {
       window.sessionStorage.removeItem("token");
-      window.sessionStorage.removeItem("username");
+      window.sessionStorage.removeItem("user");
 
       //清空vuex里的菜单路由
-      //this.$store.commit('saveRoutes2Store',[]);
       this.$store.commit('saveRoutes2Store',[]);
       //跳转到登录页
-      this.$router.replace("/")
+      this.$router.replace("/");
     },
     commandHandler(command) {
       if(command == 'logout') {
@@ -82,7 +82,7 @@ export default {
       return this.$store.state.routes;
 
     }
-  },
+  }
 
 
 

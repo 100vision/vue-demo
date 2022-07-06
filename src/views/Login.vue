@@ -66,7 +66,7 @@
                   window.sessionStorage.setItem("token",response.headers["authorization"]);
 
                   //切换路由到主页
-                  this.$router.replace({name:'home'});
+                  this.$router.replace({name:'home'}).catch(() =>true);
                 }
             }).catch(err => console.log(err));
           },

@@ -20,15 +20,26 @@ router.beforeEach((to,from,next) => {
   //根据token判断当前浏览器是否已经登录，如果没有登录不加载路由菜单。
   if(window.sessionStorage.getItem("token")) {
       getMenuRoutes(router,store);
-      if(!window.sessionStorage.getItem("username")) {
-        instance.get("/api/user/info").then(resp=> window.sessionStorage.setItem("username",JSON.stringify(resp.data.payload)));
+      if (!window.sessionStorage.getItem("user")) {
+        //获取登录成功的用户信息
+         return instance.get("/api/user/info").then(resp=>{
+          if (resp){
+              //把用户信息存入浏览器SessionStorage
+              window.sessionStorage.setItem("user",JSON.stringify(resp.data.payload));
+              next("home");
+          }
+        });
       }
+
       next();
+
   }else{
       next();
   }
 
 })
+
+
 
 /* eslint-disable no-new */
 new Vue({

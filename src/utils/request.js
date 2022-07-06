@@ -36,7 +36,7 @@ instance.interceptors.response.use(response=>{
   }
   return response;
 
-  },error => {
+  },err => {
     //api接口异常的拦截
     if(err.response.status == 500 || err.response.status == 504 || err.response.status == 404) {
       Message.error("服务器网络或内部异常");
