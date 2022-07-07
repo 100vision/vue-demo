@@ -65,8 +65,13 @@
                   //成功登录后，拿到后端response的token并写入浏览器的local storage.
                   window.sessionStorage.setItem("token",response.headers["authorization"]);
 
-                  //切换路由到主页
-                  this.$router.replace({name:'home'}).catch(() =>true);
+                  //获取浏览器的referer URI
+                  let path = this.$route.query.redirect;
+                  console.log(path);
+                  //根据referer url判断登录后的跳目标跳转页面。
+                  // 1.如果referer是登录页，登录后则进入home。
+                  // 2、如果referer是其他url, 登录后则路由到目标页面。
+                  this.$router.push((path == '/' || path == undefined) ? '/home' : path);
                 }
             }).catch(err => console.log(err));
           },
