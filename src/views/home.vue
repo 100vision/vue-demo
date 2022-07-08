@@ -44,6 +44,11 @@
             </el-menu>
         </el-aside>
         <el-main>
+          <!-- 导航面包屑 -->
+          <el-breadcrumb separator-class="el-icon-arrow-right" v-if = "this.$router.currentRoute.path != '/home'">
+            <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
+            <el-breadcrumb-item>{{this.$router.currentRoute.name}}</el-breadcrumb-item>
+          </el-breadcrumb>
           <router-view></router-view>
         </el-main>
       </el-container>
@@ -99,14 +104,14 @@ export default {
 
 
 .el-aside {
-  background-color: #D3DCE6;
+  background-color: white;
   color: #333;
   text-align: center;
   line-height: 200px;
 }
 
 .el-main {
-  background-color: #E9EEF3;
+  background-color: white;
   color: #333;
   text-align: center;
   line-height: 160px;
