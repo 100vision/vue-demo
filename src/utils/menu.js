@@ -18,6 +18,9 @@ export const getMenuRoutes = (router,store) => {
       //调用自定义方法parseRoutes得到格式化好的路由。因api接口获取到路由数据中component是一个字符串，不能直接做路由使用，需要在写一个方法转换成vue组件对象
       let routesParsed = parseRoutes(resp.data.payload);
 
+      console.log("打印后台获取的菜单集合........")
+      console.log(routesParsed);
+
 
       //格式化后添加到Vue router
       router.addRoutes(routesParsed);
@@ -52,7 +55,18 @@ export const parseRoutes = (routes) =>{
       name:name,
       children:children,
       component(resolve){
-        require(['../views/'+ component + '.vue'],resolve);
+        if (component.startsWith('home')) {
+          require(['../views/'+ component + '.vue'],resolve);
+        }else if(component.startsWith("admin")) {
+          require(['../views/admin/'+ component + '.vue'],resolve);
+        }else if (component.startsWith("order")) {
+          require(['../views/order/'+ component + '.vue'],resolve);
+        }else if (component.startsWith("product")) {
+          require(['../views/product/'+ component + '.vue'],resolve);
+        }else if (component.startsWith("reporting")) {
+          require(['../views/reporting/'+ component + '.vue'],resolve);
+        }
+
       }
     }
 

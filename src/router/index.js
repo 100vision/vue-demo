@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Product from "../views/product";
+import Product from "../views/product/product_general";
 import User from "../views/User";
 import App from "../App";
 
@@ -21,7 +21,7 @@ export default new Router({
       path:'/home',
       name: 'home',
       component:()=>import('../views/home'),
-      hidden: true
+      //hidden: true
     },
 
 

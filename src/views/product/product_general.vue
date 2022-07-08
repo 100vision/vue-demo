@@ -9,9 +9,9 @@
       <th>Price</th></tr>
 
       <tr v-for="product in products">
-        <td>{{product.productId}}</td>
-        <td>{{product.name}}</td>
-        <td>{{product.price}}</td>
+        <td>{{ product_general.productId }}</td>
+        <td>{{ product_general.name }}</td>
+        <td>{{ product_general.price }}</td>
         <td>
           <router-link to="/">Edit</router-link>
           <router-link to="/">Remove</router-link>
@@ -28,7 +28,7 @@
 <script>
 
   import axios from 'axios';
-  import instance from "../utils/request";
+  import instance from "../../utils/request";
     export default {
         name: 'product',
         data(){

@@ -23,13 +23,19 @@
           <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
             <el-menu router unique-opened>
               <!-- 从路由中遍历一级菜单项 --->
-              <el-submenu index=":index+''" v-for="(item,index) in routes" :key="index" v-if="!item.hidden">
+              <el-submenu :index="index_L1 +''" v-for="(node_L1,index_L1) in routes" :key="index_L1">
                 <template slot="title"><i class="el-icon-location"></i>
-                  <span>{{item.name}}</span>
+                  <span>{{node_L1.name}}</span>
                 </template>
-                  <!-- 从路由中遍历2级菜单项--->
-                  <el-menu-item :index="children.path" v-for="(children,index_child) in item.children" :key="index_child">
-                    {{children.name}}</el-menu-item>
+                <!-- 从路由中遍历2级菜单项(叶子) --->
+
+                    <el-menu-item :index="node_L2.path" v-for="(node_L2,index_L2) in node_L1.children" :key="index_L2">
+
+                      <template slot="title"><i class="el-icon-location"></i>
+                        <span>{{node_L2.name}}</span></template>
+
+                    </el-menu-item>
+
 
 
               </el-submenu>
@@ -79,7 +85,7 @@ export default {
   },
   computed:{
     routes(){
-      return this.$store.state.routes;
+      return this.$store.state.routes;  //获取Vuex中的routes
 
     }
   }
