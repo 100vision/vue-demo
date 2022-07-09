@@ -50,7 +50,7 @@
             <el-breadcrumb-item>{{this.$router.currentRoute.name}}</el-breadcrumb-item>
           </el-breadcrumb>
 
-          <router-view class="home-routerview"></router-view>
+          <router-view></router-view>
         </el-main>
       </el-container>
     </el-container>
@@ -115,7 +115,7 @@ export default {
   background-color: white;
   color: #333;
   text-align: center;
-  line-height: 160px;
+  line-height: 10px;
 }
 
 body > .el-container {
@@ -124,11 +124,11 @@ body > .el-container {
 
 .el-container:nth-child(5) .el-aside,
 .el-container:nth-child(6) .el-aside {
-  line-height: 260px;
+  line-height: 20px;
 }
 
 .el-container:nth-child(7) .el-aside {
-  line-height: 320px;
+  line-height: 20px;
 }
 
 .home-header {
@@ -149,6 +149,7 @@ body > .el-container {
 
 .home-routerview {
   margin-top: 10px;
+  display: flex;
 }
 
 .el-dropdown-link {
