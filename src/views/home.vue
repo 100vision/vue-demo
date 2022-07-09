@@ -49,7 +49,8 @@
             <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
             <el-breadcrumb-item>{{this.$router.currentRoute.name}}</el-breadcrumb-item>
           </el-breadcrumb>
-          <router-view></router-view>
+
+          <router-view class="home-routerview"></router-view>
         </el-main>
       </el-container>
     </el-container>
@@ -144,6 +145,10 @@ body > .el-container {
   font-family: "Microsoft YaHei";
   font-size: large;
 
+}
+
+.home-routerview {
+  margin-top: 10px;
 }
 
 .el-dropdown-link {
