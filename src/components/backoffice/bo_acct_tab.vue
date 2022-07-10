@@ -1,21 +1,21 @@
 <template>
  <div class="tab-container">
    <div id="tab-container-header" class="tab-container-header">
-     <el-input v-model="input" placeholder="请输入内容"  class="tab-inputbox"></el-input>
-     <el-button type="primary" class=" el-icon-plus" style="margin-left: 5px">添加</el-button>
+     <el-input v-model="input" placeholder="请输入内容" size:small class="tab-inputbox"></el-input>
+     <el-button type="primary" class=" el-icon-plus" size="small" style="margin-left: 5px">添加</el-button>
    </div>
 
    <div >
      <el-table
-       :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
-       style="width: 100%">
+       :data="users.filter(data => !search || data.username.toLowerCase().includes(search.toLowerCase()))"
+       style="width: 80%">
        <el-table-column
-         label="Date"
-         prop="date">
+         label="用户名"
+         prop="username">
        </el-table-column>
        <el-table-column
-         label="Name"
-         prop="name">
+         label="状态"
+         prop="isEnabled">
        </el-table-column>
        <el-table-column
          align="right">
@@ -45,24 +45,9 @@ export default {
   name: "sysadm_acct",
   data() {
     return {
-      tableData: [{
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1517 弄'
-      }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1519 弄'
-      }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1516 弄'
-      }],
-      search: ''
+      users: [],
+      search: '',
+      input:''
     }
   },
   methods: {
@@ -74,7 +59,36 @@ export default {
     }
   },
 
+  mounted() {
+    this.$instance.get("/api/admin/users").then(resp => {
+      if (resp) {
+        let userList = resp.data.payload;
+        let users = [];
+        userList.forEach(userObj => {
+          let {
+            username,
+            isEnabled,
+            roles
+          } = userObj;
+
+          let user = {
+            username: userObj.username,
+            isEnabled: JSON.stringify(userObj.isEnabled),
+            roles: JSON.stringify(userObj.roles)
+          }
+
+          users.push(user);
+
+
+        });
+        this.users = users;
+      }
+
+  });
+  }
 }
+
+
 </script>
 
 <style scoped>

@@ -108,7 +108,8 @@ export default {
   background-color: white;
   color: #333;
   text-align: center;
-  line-height: 200px;
+  line-height: 5px;
+
 }
 
 .el-main {
