@@ -2,7 +2,7 @@
  <div class="tab-container">
    <div id="tab-container-header" class="tab-container-header">
      <el-input v-model="input" placeholder="请输入内容" size:small class="tab-inputbox"></el-input>
-     <el-button type="primary" class=" el-icon-plus" size="small" style="margin-left: 5px">添加</el-button>
+     <el-button type="primary" class=" el-icon-plus" size="small" style="margin-left: 5px" @click="addUser()">添加</el-button>
    </div>
 
    <div >
@@ -36,6 +36,24 @@
          </template>
        </el-table-column>
      </el-table>
+
+     <el-dialog title="编辑用户" :visible.sync="dialogFormVisible">
+       <el-form :model="form">
+         <el-form-item label="用户名" :label-width="formLabelWidth">
+           <el-input v-model="form.name" autocomplete="off"></el-input>
+         </el-form-item>
+         <el-form-item label="密码" :label-width="formLabelWidth">
+           <el-input v-model="form.name" autocomplete="off"></el-input>
+         </el-form-item>
+
+       </el-form>
+       <div slot="footer" class="dialog-footer">
+         <el-button @click="dialogFormVisible = false">取 消</el-button>
+         <el-button type="primary" @click="dialogFormVisible = false">保存</el-button>
+       </div>
+     </el-dialog>
+
+
    </div>
  </div>
 </template>
@@ -45,17 +63,31 @@ export default {
   name: "sysadm_acct",
   data() {
     return {
+      user: {},
       users: [],
       search: '',
-      input:''
+      input:'',
+      dialogFormVisible:false,
+      formLabelWidth:'',
+      formname: '编辑用户',
+      formregion:'',
+      form: {
+
+      }
     }
   },
   methods: {
     handleEdit(index, row) {
-      console.log(index, row);
+      this.showEditDialog();
     },
     handleDelete(index, row) {
       console.log(index, row);
+    },
+    showEditDialog() {
+      this.dialogFormVisible = true
+    },
+    addUser() {
+      this.$instance.post("/api/admin/add",user).then()
     }
   },
 
